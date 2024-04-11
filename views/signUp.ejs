@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Form-v10 by Colorlib</title>
+    <!-- Mobile Specific Metas -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <!-- Font-->
+    <link rel="stylesheet" type="text/css" href="/css/montserrat-font.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css"
+    />
+    <!-- Main Style Css -->
+    <link rel="stylesheet" href="/css/styleSignup.css" />
+    <style>
+      #message {
+        display: none;
+      }
+      #error {
+        display: none;
+      }
+    </style>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body class="form-v10" style="">
+    <div
+      class="page-content"
+      style="min-height: 100vh; background-image: url(/img/3.png) !important"
+    >
+      <div class="form-v10-content">
+        <div id="message" class="alert alert-success" role="alert">
+          This is a success alert—check it out!
+        </div>
+        <div id="error" class="alert alert-danger" role="alert">
+          This is a danger alert—check it out!
+        </div>
+        <form
+          class="form-detail"
+          action="/admin/signup/user"
+          method="post"
+          enctype="multipart/form-data"
+          id="myform"
+        >
+          <div class="form-left">
+            <h2 style="color: rgb(156, 99, 28)">Signup Users</h2>
+
+            <div class="form-group">
+              <div class="form-row form-row-1">
+                <input
+                  type="text"
+                  name="firstName"
+                  id="first_name"
+                  class="input-text"
+                  placeholder="First Name"
+                  required
+                />
+              </div>
+              <div class="form-row form-row-2">
+                <input
+                  type="text"
+                  name="lastName"
+                  id="last_name"
+                  class="input-text"
+                  placeholder="Last Name"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-row form-row">
+              <input
+                type="email"
+                name="username"
+                id="username"
+                class="input-text"
+                placeholder="Username should end with @propertygo.com"
+                required
+              />
+            </div>
+            <div class="form-row form-row">
+              <input
+                type="password"
+                name="password"
+                id="username"
+                class="input-text"
+                placeholder="Password"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <div class="form-row form-row">
+                <input
+                  type="text"
+                  name="dob"
+                  id="username"
+                  class="input-text"
+                  placeholder="Date of birth"
+                  required
+                />
+              </div>
+              <div class="form-row form-row">
+                <input
+                  type="text"
+                  name="address"
+                  id="username"
+                  class="input-text"
+                  placeholder="Address"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <input
+                type="text"
+                name="company"
+                class="company"
+                id="company"
+                placeholder="Company"
+                required
+              />
+            </div>
+
+            <div class="form-row form-row-4">
+              <select name="role" class="p-2">
+                <option value="viewer">Viewer</option>
+                <option value="superUser">Super User</option>
+                <option value="investor">Investor</option>
+              </select>
+              <span class="select-btn">
+                <i class="zmdi zmdi-chevron-down"></i>
+              </span>
+            </div>
+
+            <div class="form-row">
+              <input
+                type="number"
+                name="investementAmount"
+                class="company"
+                id="company"
+                placeholder="If Investor : Investement Amount"
+              />
+            </div>
+            <label for="" class="form-label ml-5" style="margin-left: 4rem"
+              >Reciept</label
+            >
+            <div class="form-row">
+              <input type="file" name="reciept" class="company" id="company" />
+            </div>
+          </div>
+
+          <div class="form-right">
+            <h2>Contact Details</h2>
+            <div class="form-row">
+              <input
+                type="text"
+                name="street"
+                class="street"
+                id="street"
+                placeholder="Street + Nr"
+                required
+              />
+            </div>
+            <div class="form-row">
+              <input
+                type="text"
+                name="additional"
+                class="additional"
+                id="additional"
+                placeholder="Additional Information"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <div class="form-row form-row-1">
+                <input
+                  type="text"
+                  name="code"
+                  class="code"
+                  id="code"
+                  placeholder="Code +"
+                  required
+                />
+              </div>
+              <div class="form-row form-row-2">
+                <input
+                  type="text"
+                  name="phone"
+                  class="phone"
+                  id="phone"
+                  placeholder="Phone Number"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <input
+                type="text"
+                name="email"
+                id="your_email"
+                class="input-text"
+                required
+                pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}"
+                placeholder="Your Offical Email"
+              />
+            </div>
+            <div class="form-checkbox">
+              <label class="container"
+                ><p>
+                  I do accept the
+                  <a href="#" class="text">Terms and Conditions</a> of your
+                  site.
+                </p>
+                <input type="checkbox" name="checkbox" />
+                <span class="checkmark"></span>
+              </label>
+            </div>
+            <div class="form-row-last" style="margin-bottom: 15rem">
+              <input
+                type="submit"
+                name="register"
+                class="register"
+                value="Register Badge"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script>
+      const message = new URLSearchParams(location.search).get("message");
+      const error = new URLSearchParams(location.search).get("error");
+
+      if (message) {
+        document.getElementById("message").style.display = "block";
+        document.getElementById("message").innerHTML = message;
+      } else if(error) {
+        document.getElementById("error").style.display = "block";
+        document.getElementById("error").innerHTML = error;
+      }
+    </script>
+  </body>
+</html>

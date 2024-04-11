@@ -1,0 +1,205 @@
+<%-include("genralHeader") %>
+<%
+function numberToMonthName(number) {
+  const months = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  if (number >= 1 && number <= 12) {
+    return months[number - 1]; 
+  } else {
+    return "Invalid month number";
+  }
+}
+%>
+<section class="p-5 ">
+  <div
+    class="continer-fluid scrolly shadow p-3"
+    style="border-radius: 16px; overflow: scroll;min-height: 100vh;"
+  >
+    <h3>Success Tracker</h3>
+<p class="mt-3">First visit to this page,Then you should defintely take a look at this..</p>
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-warning mt-2" data-toggle="modal" data-target="#exampleModalCenter">
+  Open Me
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content modal-lg">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Greetings,</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <p class="mt-3">
+      
+
+This track report is formulated utilizing the daily surveys accessible from the homepage. You have the opportunity to contribute to this survey multiple times per day. These collective submissions culminate in the creation of your monthly report, providing you with a comprehensive overview of your progress. Consistency in survey participation is advised to enhance our predictive capabilities.
+<br>
+Should an instance occur where a survey is inadvertently missed, a suggested course of action is to amalgamate the missed entry with the subsequent day's submission. However, it is strongly recommended to adhere to the initial approach of daily submissions for optimal results.
+<br>
+Wishing you success in your trading endeavors.
+    </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">I Understand</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <hr class="my-4" />
+   
+
+
+
+
+  <div id="accordion">
+    <% let i=0 %>
+<% allMonths.forEach((monthlyReport)=>{ %>
+  <div class="card my-3" >
+    <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#<%=i%>" aria-expanded="true" aria-controls="<%=i%>"><div class="row">
+            <div class="col col-lg-11 col-md-10 col-sm-10">
+      <h5 class="mb-0">
+        <button class="btn btn-light" data-toggle="collapse" data-target="#<%=i%>" aria-expanded="true" aria-controls="<%=i%>">
+          
+         <h5 style="color: rgb(116, 117, 117);"> Success Tracker for <%=numberToMonthName(monthlyReport.month)+" " +monthlyReport.year %></h5> 
+         </div><div class="col col-lg-1 col-md-2 col-sm-2">
+
+          <i class="fa-solid fa-caret-down" data-toggle="collapse" data-target="#<%=i%>" aria-expanded="true" aria-controls="<%=i%>"></i>
+         </div>
+         
+        </button>
+      </h5></div>
+    </div>
+
+    <div id="<%=i%>" class="collapse <%=i==0?'show':' '%>" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+         <div class="row pt-4">
+      <div class="col col-lg-2 col-md-12 col-sm-12 col-12 px-1">
+        <div class="card shadow p-3 pb-1 btn text-white bg-success">
+          <div class="card-content"  style="opacity: 0.8;">
+            <h4 class="mb-4 " style="text-align: left;"><strong><%=monthlyReport.profit%> PKR</strong></h4>
+            <i class="fa-solid fa-angles-down"  style="font-size: 7rem;position: absolute;color: rgb(255, 255, 255);opacity:0.2;"></i>
+            <br />
+            <h4 class="mt-5 " style="text-align: left;">Profit</h4>
+          </div>
+        </div>
+      </div>
+      
+
+      <div class="col col-lg-2 col-md-12 col-sm-12 col-12 px-1">
+        <div class="card shadow p-3 pb-1 btn text-white bg-danger">
+          <div class="card-content" style="opacity: 0.8;">
+            <h4 class="mb-4 " style="text-align: left;"><strong><%=monthlyReport.purchases%> PKR</strong></h4>
+            <i class="fa-solid fa-angles-up"  style="font-size: 7rem;position: absolute;color: rgb(255, 255, 255);opacity:0.2;"></i>
+            <br />
+            <h4 class="mt-5 " style="text-align: left;">Purchases</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col col-lg-2 col-md-12 col-sm-12 col-12 px-1">
+        <div class="card shadow p-3 pb-1 btn text-white bg-dark">
+          <div class="card-content" style="opacity: 0.8;">
+            <h4 class="mb-4 " style="text-align: left;"><strong><%=monthlyReport.sales%> PKR</strong></h4>
+            <i class="fa-solid fa-cart-shopping"  style="font-size: 7rem;position: absolute;color: rgb(255, 255, 255);opacity:0.2;"></i>
+            <br />
+            <h4 class="mt-5 " style="text-align: left;">Sales</h4>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col col-lg-2 col-md-12 col-sm-12 col-12 px-1">
+        <div class="card shadow p-3 pb-1 btn text-white bg-warning">
+          <div class="card-content"  style="opacity: 0.8;">
+            <h4 class="mb-4 " style="text-align: left;"><strong><%=monthlyReport.withdrawl?monthlyReport.withdrawl:0%> PKR</strong></h4>
+            <i class="fa-solid fa-sack-dollar"  style="font-size: 7rem;position: absolute;color: rgb(255, 255, 255);opacity:0.2;"></i>
+
+            <br />
+            <h4 class="mt-5 " style="text-align: left;">Withdrawls</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col col-lg-2 col-md-12 col-sm-12 col-12 px-1">
+        <div class="card shadow p-3 pb-1 btn text-white bg-secondary">
+          <div class="card-content" style="opacity: 0.8;">
+            <h4 class="mb-4 " style="text-align: left;"><strong><%=monthlyReport.deposits?monthlyReport.deposits:0%> PKR</strong></h4>
+            <i class="fa-solid fa-hand-holding-dollar"  style="font-size: 7rem;position: absolute;color: rgb(255, 255, 255);opacity:0.2;"></i>
+            <br />
+            <h4 class="mt-5 " style="text-align: left;">Deposits</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col col-lg-2 col-md-12 col-sm-12 col-12 px-1">
+        <div class="card shadow p-3 pb-1 btn text-white bg-primary">
+          <div class="card-content"  style="opacity: 0.8;">
+            <h4 class="mb-4 " style="text-align: left;"><strong><%=monthlyReport.visits%> Visits</strong></h4>
+            <i class="fa-solid fa-location-dot"  style="font-size: 7rem;position: absolute;color: rgb(255, 255, 255);opacity:0.2;"></i>
+
+            <br />
+            <h4 class="mt-5 " style="text-align: left;">Visits</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th style="text-align: center" scope="col">Amount In</th>
+          <th style="text-align: center" scope="col">Amount Out</th>
+          <th style="text-align: center" scope="col">Purchases</th>
+          <th style="text-align: center" scope="col">Sale</th>
+          <th style="text-align: center" scope="col">Profit</th>
+          <th style="text-align: left" scope="col">Visited Sites</th>
+          <th style="text-align: left" scope="col">Description</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <% survey.forEach((item)=>{ %>
+          <% if(item.month==monthlyReport.month){ %>
+        <tr>
+          <th scope="row"><%=item.fullDate %></th>
+          <td style="text-align: center"><%=item.totallInflow%></td>
+          <td style="text-align: center"><%=item.totallOutflow%></td>
+          <td style="text-align: center">
+            <span class="btn btn-danger" style="min-width: 5rem !important"
+              ><%=item.purchases ? item.purchases: "---"%></span
+            >
+          </td>
+          <td style="text-align: center">
+            <span class="btn btn-warning" style="min-width: 5rem !important"
+              ><%=item.sales ? item.sales: "---"%>
+            </span>
+          </td>
+          <td style="text-align: center">
+            <span class="btn btn-success" style="min-width: 5rem !important"
+              ><%=item.profit ? item.profit: "---"%>
+            </span>
+          </td>
+          <td style="text-align: left"><%=item.visitedSite%></td>
+          <td style="text-align: left"><%=item.description%></td>
+        </tr>
+        <% } %>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+      </div>
+      
+    </div>
+    <% i++ %>
+<% }) %>
+
+  </div>
+  
+
+</div>
+</section>
+<%-include("index-footer") %>

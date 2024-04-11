@@ -1,0 +1,204 @@
+<%-include("genralHeader") %>
+<% function formatNumberWithCommas(number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+} %>
+<section style="min-height: 100vh;">
+
+<div class="p-5 pb-0">
+<h2>TRANSACTION HISTORY</h2>
+<p>A detailed summary of the transactions performed is listed below !</p>
+<p>A totall number of <%=transactionHistory.length%> transactions are made til this date and time : <%=new Date()%>. And the currnet site balance is <%=treasure.overAllBalance%></p>
+</div>
+<hr>
+
+<div class="container-fluid p-5">
+  
+  <% transactionHistory.forEach((transaction)=>{ %> <%
+  if(transaction.transactionType =="In-Coming"  ){ %>
+  <div class="card alert alert-success shadow mt-3 p-3">
+    <div class="row">
+      <div
+        class="col-12 col-sm-2 col-md-2 p-2 d-flex align-items-center justify-content-center my-5"
+      >
+        <i
+          class="fas fa-arrow-circle-down fa-xl text-success"
+          style="font-size: 5rem !important"
+        ></i>
+      </div>
+
+      <div class="col-12 col-sm-8 col-md-8 p-2">
+        <h5 style="font-weight: bold;">INCOMING FUNDS TRANSFER</h5>
+        <p>You've been credited with <%=transaction.transactionAmount%> PKR</p>
+        <h6 style="font-weight: bold;">TRANSACTION DETAILS</h6>
+        <p>Payer Name : <%=transaction.transactionRecipient%> <br>
+        Transaction Purpose : <%=transaction.transactionPurpose%> <br>
+        Date of Transaction: <%=transaction.date.toLocaleString() %>
+    </p>
+        <p class="dark">
+          Updated account Balance after the transaction is
+          <span style="font-weight: bold;"><%=formatNumberWithCommas(transaction.updatedBalance + transaction.transactionAmount) %></span>  <br>
+          Your account Balance before the transaction was
+          <span style="font-weight: bold;"><%=formatNumberWithCommas(transaction.updatedBalance)%> </span>  
+        </p>
+        <a href="<%=transaction.transactionReciept%>" target="_blank" class="btn btn-outline-success">View Reciept</a>
+      </div>
+
+      <div
+        class="col-12 col-sm-2 col-md-2 p-2 d-flex align-items-center justify-content-center"
+      >
+        <h5 class="text-success" style="font-weight: bold;">+ <%=formatNumberWithCommas(formatNumberWithCommas(transaction.transactionAmount))%> PKR</h5>
+      </div>
+    </div>
+  </div>
+  <% } if(transaction.transactionType =="Out Going"){ %>
+  <div class="card alert alert-danger shadow mt-3 p-3">
+    <div class="row">
+      <div
+        class="col-12 col-sm-2 col-md-2 p-2 d-flex align-items-center my-5 justify-content-center"
+      >
+        <i
+          class="fas fa-arrow-circle-up fa-xl text-danger"
+          style="font-size: 5rem !important"
+        ></i>
+      </div>
+
+      <div class="col-12 col-sm-8 col-md-8 p-2">
+        <h5 style="font-weight: bold;">OUTGOING FUNDS TRANSFER</h5>
+        <p>You've been debited with <%=transaction.transactionAmount%> PKR</p>
+        <h6 style="font-weight: bold;">TRANSACTION DETAILS</h6>
+        <p>Paid To : <%=transaction.transactionRecipient%> <br>
+        Date of Transaction: <%=transaction.date.toLocaleString() %>
+    </p>
+
+        <p class="dark">
+          Updated account Balance after the transaction is
+        <span style="font-weight: bold;"><%=formatNumberWithCommas(transaction.updatedBalance)%></span>  <br>
+          Your account Balance before the transaction was
+          <span style="font-weight: bold;"><%=formatNumberWithCommas((transaction.updatedBalance + transaction.transactionAmount)) %> </span>  
+        </p>
+        <a href="<%=transaction.transactionReciept%>" target="_blank" class="btn btn-outline-danger">View Reciept</a>
+
+      </div>
+
+      <div
+        class="col-12 col-sm-2 col-md-2 p-2 d-flex align-items-center justify-content-center"
+      >
+        <h5 style="font-weight: bold;" class="text-danger">- <%=formatNumberWithCommas(transaction.transactionAmount)%> PKR</h5>
+      </div>
+    </div>
+  </div>
+ 
+  <% } %> <% if(transaction.transactionType =="Deposit" ){ %>
+  <div class="card alert alert-success shadow mt-3 p-3">
+    <div class="row">
+      <div
+        class="col-12 col-sm-2 col-md-2 p-2 d-flex align-items-center justify-content-center my-5"
+      >
+        <i
+          class="fas fa-arrow-circle-down fa-xl text-success"
+          style="font-size: 5rem !important"
+        ></i>
+      </div>
+
+      <div class="col-12 col-sm-8 col-md-8 p-2">
+        <h5 style="font-weight: bold;">FUNDS DEPOSIT</h5>
+        <p>You've been debited with <%=transaction.transactionAmount%> PKR</p>
+        <h6 style="font-weight: bold;">TRANSACTION DETAILS</h6>
+        Transaction Purpose : <%=transaction.transactionPurpose%> <br>
+        Date of Transaction: <%=transaction.date.toLocaleString() %>
+    </p>
+        <p class="dark">
+          Updated account Balance after the transaction is
+          <span style="font-weight: bold;"><%=formatNumberWithCommas(transaction.updatedBalance)%></span>  <br>
+          Your account Balance before the transaction was
+          <span style="font-weight: bold;"><%=formatNumberWithCommas(transaction.updatedBalance - transaction.transactionAmount) %> </span>  
+        </p>
+        <a href="<%=transaction.transactionReciept%>" target="_blank" class="btn btn-outline-success">View Reciept</a>
+      </div>
+
+      <div
+        class="col-12 col-sm-2 col-md-2 p-2 d-flex align-items-center justify-content-center"
+      >
+        <h5 class="text-success" style="font-weight: bold;">+ <%=formatNumberWithCommas(formatNumberWithCommas(transaction.transactionAmount))%> PKR</h5>
+      </div>
+    </div>
+  </div>
+  <% } %> <% if(transaction.transactionType =="Investment" ){ %>
+  <div class="card alert alert-success shadow mt-3 p-3">
+    <div class="row">
+      <div
+        class="col-12 col-sm-2 col-md-2 p-2 d-flex align-items-center justify-content-center my-5"
+      >
+        <i
+          class="fas fa-arrow-circle-down fa-xl text-success"
+          style="font-size: 5rem !important"
+        ></i>
+      </div>
+
+      <div class="col-12 col-sm-8 col-md-8 p-2">
+        <h5 style="font-weight: bold;">FUNDS INVESTMENT</h5>
+        <p><%=transaction.transactionPerformer%> has invested an amount of  <%=transaction.transactionAmount%> PKR</p>
+        <h6 style="font-weight: bold;">TRANSACTION DETAILS</h6>
+        Transaction Purpose : <%=transaction.transactionPurpose%> <br>
+        Date of Transaction: <%=transaction.date.toLocaleString() %>
+    </p>
+        <p class="dark">
+          Updated account Balance after the transaction is
+          <span style="font-weight: bold;"><%=formatNumberWithCommas(transaction.updatedBalance)%></span>  <br>
+          Your account Balance before the transaction was
+          <span style="font-weight: bold;"><%=formatNumberWithCommas(transaction.updatedBalance - transaction.transactionAmount)   %> </span>  
+        </p>
+        <a href="<%=transaction.transactionReciept%>" target="_blank" class="btn btn-outline-success">View Reciept</a>
+      </div>
+
+      <div
+        class="col-12 col-sm-2 col-md-2 p-2 d-flex align-items-center justify-content-center"
+      >
+        <h5 class="text-success" style="font-weight: bold;">+ <%=formatNumberWithCommas(formatNumberWithCommas(transaction.transactionAmount))%> PKR</h5>
+      </div>
+    </div>
+  </div>
+  <% } if(transaction.transactionType =="Withdrawl"){ %>
+  <div class="card alert alert-danger shadow mt-3 p-3">
+    <div class="row">
+      <div
+        class="col-12 col-sm-2 col-md-2 p-2 d-flex align-items-center my-5 justify-content-center"
+      >
+        <i
+          class="fas fa-arrow-circle-up fa-xl text-danger"
+          style="font-size: 5rem !important"
+        ></i>
+      </div>
+
+      <div class="col-12 col-sm-8 col-md-8 p-2">
+        <h5 style="font-weight: bold;">FUNDS WITHDRAWL</h5>
+        <p>You've been debited with <%=transaction.transactionAmount%> PKR</p>
+        <h6 style="font-weight: bold;">TRANSACTION DETAILS</h6>
+        Date of Transaction: <%=transaction.date.toLocaleString() %>
+    </p>
+
+        <p class="dark">
+          Updated account Balance after the transaction is
+        <span style="font-weight: bold;"><%=formatNumberWithCommas(transaction.updatedBalance)%></span>  <br>
+          Your account Balance before the transaction was
+          <span style="font-weight: bold;"><%=formatNumberWithCommas((transaction.updatedBalance + transaction.transactionAmount)) %> </span>  
+        </p>
+        <a href="<%=transaction.transactionReciept%>" target="_blank" class="btn btn-outline-danger">View Reciept</a>
+
+      </div>
+
+      <div
+        class="col-12 col-sm-2 col-md-2 p-2 d-flex align-items-center justify-content-center"
+      >
+        <h5 style="font-weight: bold;" class="text-danger">- <%=formatNumberWithCommas(transaction.transactionAmount)%> PKR</h5>
+      </div>
+    </div>
+  </div>
+  <% } %>
+  
+  
+  <% }) %>
+
+</div>
+</section>
+<%-include("index-footer") %>

@@ -1,0 +1,206 @@
+<%-include('genralHeader') %>
+<section class="p-5 m-5" style="min-height: 100vh">
+  <h2 class="text-dark">Database</h2>
+  <div class="row px-2">
+    <div class="col col-lg-3 col-md-12 col-sm-12 col-12 px-1">
+        <div class="card shadow p-3 pb-1 btn text-white bg-dark">
+          <div class="card-content"  style="opacity: 0.8;">
+            <h4 class="mb-4 " style="text-align: left;"><strong>SUPER USERS</strong></h4>
+            <i class="fa-solid fa-user-shield"  style="font-size: 7rem;position: absolute;color: rgb(255, 255, 255);opacity:0.2;"></i>
+            <br />
+            <h4 class="mt-5 " style="text-align: left;"><%=superUser.length%></h4>
+          </div>
+        </div>
+      </div>
+      <div class="col col-lg-3 col-md-12 col-sm-12 col-12 px-1">
+        <div class="card shadow p-3 pb-1 btn text-white bg-warning">
+          <div class="card-content"  style="opacity: 0.8;">
+            <h4 class="mb-4 " style="text-align: left;"><strong>Viewers</strong></h4>
+            <i class="fa-regular fa-eye"  style="font-size: 7rem;position: absolute;color: rgb(255, 255, 255);opacity:0.2;"></i>
+            <br />
+            <h4 class="mt-5 " style="text-align: left;"><%=viewers.length%></h4>
+          </div>
+        </div>
+      </div>
+      <div class="col col-lg-3 col-md-12 col-sm-12 col-12 px-1">
+        <div class="card shadow p-3 pb-1 btn text-white bg-primary">
+          <div class="card-content"  style="opacity: 0.8;">
+            <h4 class="mb-4 " style="text-align: left;"><strong>Investors</strong></h4>
+            <i class="fa-solid fa-users"  style="font-size: 7rem;position: absolute;color: rgb(255, 255, 255);opacity:0.2;"></i>
+            <br />
+            <h4 class="mt-5 " style="text-align: left;"><%=investors.length%></h4>
+          </div>
+        </div>
+      </div>
+      <div class="col col-lg-3 col-md-12 col-sm-12 col-12 px-1">
+        <div class="card shadow p-3 pb-1 btn text-white bg-danger">
+          <div class="card-content"  style="opacity: 0.8;">
+            <h4 class="mb-4 " style="text-align: left;"><strong>Totall Investements</strong></h4>
+            <i class="fa-solid fa-coins"  style="font-size: 7rem;position: absolute;color: rgb(255, 255, 255);opacity:0.2;"></i>
+            <br />
+            <h4 class="mt-5 " style="text-align: left;"><%=treasure.investments%></h4>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="container-fluid p-3 my-3 shadow" style="border-radius: 16px">
+    <h3>Super Users</h3>
+    <p style="color: rgb(57, 58, 58)">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+      Lorem Ipsum has been the industry's standard dummy text ever since the
+      1500s, when an unknown printer took a galley of type and scrambled
+    </p>
+    <hr />
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Serial No .</th>
+          <th scope="col">Username</th>
+          <th scope="col">Name</th>
+          <th scope="col">DOB</th>
+          <th scope="col">Company</th>
+          <th scope="col">Address</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Offical Email</th>
+          <th scope="col">Time Stamp</th>
+        </tr>
+      </thead>
+
+<% if(superUser.length == 0){ %>
+    <tbody>
+        <tr>
+    <h6 style="text-align: center;" class="btn-danger p-3 rounded">No data found !</h6>
+</tr>
+    </tbody>
+<% }else{ %>
+
+      <tbody>
+    <% let i=1 %>
+
+        <% superUser.forEach((superUser)=>{ %>
+        <tr>
+          <th scope="row"><%=i%></th>
+          <td><%=superUser.username%></td>
+          <td><%=superUser.name%></td>
+          <td><%=superUser.dateOfBirth%></td>
+          <td><%=superUser.company%></td>
+          <td><%=superUser.address%></td>
+          <td><%=superUser.phone%></td>
+          <td><%=superUser.email%></td>
+          <td><%=superUser.timeStamp.toLocaleDateString()%></td>
+        </tr>
+        <% i++ %>
+        <% }) %>
+      </tbody>
+
+      <% } %>
+    </table>
+  </div>
+
+  <div class="container-fluid p-3 my-3 shadow" style="border-radius: 16px">
+    <h3>Investors</h3>
+    <p style="color: rgb(57, 58, 58)">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+      Lorem Ipsum has been the industry's standard dummy text ever since the
+      1500s, when an unknown printer took a galley of type and scrambled
+    </p>
+    <hr />
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Serial No .</th>
+          <th scope="col">Investor Name</th>
+          <th scope="col">Investement Amount</th>
+          <th scope="col">DOB</th>
+          <th scope="col">Company</th>
+          <th scope="col">Address</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Offical Email</th>
+          <th scope="col">Time Stamp</th>
+        </tr>
+      </thead>
+
+<% if(investors.length == 0){ %>
+    <tbody>
+        <tr>
+    <h6 style="text-align: center;" class="btn-danger p-3 rounded">No data found !</h6>
+</tr>
+    </tbody>
+<% }else{ %>
+
+      <tbody>
+    <% let i=1 %>
+        <% investors.forEach((investor)=>{ %>
+        <tr>
+          <th scope="row"><%=i%></th>
+          <td><%=investor.name%></td>
+          <td><%=investor.investmentAmount%></td>
+          <td><%=investor.dateOfBirth%></td>
+          <td><%=investor.company%></td>
+          <td><%=investor.address%></td>
+          <td><%=investor.phone%></td>
+          <td><%=investor.email%></td>
+          <td><%=investor.timeStamp.toLocaleDateString()%></td>
+        </tr>
+        <% i++ %>
+        <% }) %>
+      </tbody>
+      <% } %>
+    </table>
+  </div>
+  <div class="container-fluid p-3 my-3 shadow" style="border-radius: 16px">
+    <h3>Audience</h3>
+    <p style="color: rgb(57, 58, 58)">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+      Lorem Ipsum has been the industry's standard dummy text ever since the
+      1500s, when an unknown printer took a galley of type and scrambled
+    </p>
+    <hr />
+    <table class="table">
+
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Serial No .</th>
+          <th scope="col">Username</th>
+          <th scope="col">Name</th>
+          <th scope="col">DOB</th>
+          <th scope="col">Company</th>
+          <th scope="col">Address</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Offical Email</th>
+          <th scope="col">Time Stamp</th>
+        </tr>
+      
+    </thead>
+    <% let i=1 %>
+<% if(viewers.length == 0){ %>
+    <tbody>
+        <tr>
+    <h6 style="text-align: center;" class="btn-danger p-3 rounded">No data found !</h6>
+</tr>
+    </tbody>
+<% }else{ %>
+      <tbody>
+        <% viewers.forEach((viewer)=>{ %>
+        <tr>
+          <th scope="row"><%=i%></th>
+          <td><%=viewer.username%></td>
+          <td><%=viewer.name%></td>
+          <td><%=viewer.dateOfBirth%></td>
+          <td><%=viewer.company%></td>
+          <td><%=viewer.address%></td>
+          <td><%=viewer.phone%></td>
+          <td><%=viewer.email%></td>
+          <td><%=viewer.timeStamp.toLocaleDateString()%></td>
+        </tr>
+        <% i++ %>
+        <% }) %>
+      </tbody>
+
+      <% } %>
+
+    </table>
+  </div>
+</section>
+
+<%-include('index-footer') %>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap-extended.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/fonts/simple-line-icons/style.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/colors.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Montserrat:wght@400;600&family=Phudu:wght@300;500&family=Tilt+Prism&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <title><%=pageName%></title>
+
+    <style>
+      @media (max-width: 990px) {
+        .navbar-collapse {
+          text-align: center !important;
+        }
+        #carouselExampleControls {
+          margin-top: 0rem !important;
+        }
+        .btn {
+          margin-top: 0.5rem;
+        }
+        #navbar {
+          background-color: rgb(183, 188, 192);
+        }
+        .nav2 {
+          margin-left: -2rem !important;
+        }
+      }
+      nav {
+        z-index: +2;
+      }
+      .navbar-brand {
+        font-family: "Black Ops One", sans-serif;
+        font-size: x-large;
+      }
+      .btn-outline-dark:hover {
+        color: aliceblue !important;
+      }
+      .navbar-nav {
+        font-family: "Montserrat 600", sans-serif;
+
+        font-size: large;
+      }
+      .dropdown-item:hover {
+        color: black !important;
+      }
+      #navbar {
+        min-height: 100vh;
+      }
+      #page1 {
+        background-color: aliceblue;
+      }
+      #carouselExampleControls img {
+        max-height: 100vh;
+        min-height: 100vh;
+        object-fit: cover;
+      }
+      #carouselExampleControls {
+        z-index: 1;
+        margin-top: -4rem;
+      }
+      .grey-bg {
+        background-color: #f5f7fa;
+      }
+
+      #nav .card:hover {
+        background-color: rgb(19, 18, 18);
+        .title {
+          color: rgba(233, 78, 94, 0.747);
+        }
+      }
+      @media (max-width: 767.98px) {
+        .border-sm-start-none {
+          border-left: none !important;
+        }
+      }
+      .loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  background: linear-gradient(0deg, rgba(255, 61, 0, 0.2) 33%, #ff3d00 100%);
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+.loader::after {
+  content: '';  
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ffffff;
+}
+@keyframes rotation {
+  0% { transform: rotate(0deg) }
+  100% { transform: rotate(360deg)}
+} 
+    
+  #content{
+    display: none;
+  }
+    </style>
+  </head>
+
+  <body>
+    <section id="loader" style="justify-content: center;text-align: center;min-height: 100vh;min-width: 100%;align-items: center;display: flex;">
+      <span class="loader"></span>
+    </section>
+    <section id="content">
+    <nav class="navbar navbar-expand-lg bg-transparent navbar-light" >
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">PROPERTY GO</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-end pt-1"
+          id="navbarNavDropdown"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item mx-1">
+              <a class="nav-link" aria-current="page" href="/"
+                ><i class="bi bi-house"></i>HOME</a
+              >
+            </li>
+            <li class="nav-item mx-1">
+              <a class="nav-link" href="/admin/database"
+                ><i class="fa-solid fa-database"></i> DATABASE</a
+              >
+              
+            </li>
+            <li class="nav-item mx-1">
+              <a class="nav-link" href="/admin/inventory"
+                ><i class="bi bi-globe-asia-australia"></i>INEVENTORY</a
+              >
+            </li>
+            <li class="nav-item mx-1">
+              <a class="nav-link" href="/admin/report"
+                ><i class="bi bi-calendar-day"></i>DAILY SURVEY</a
+              >
+            </li>
+            <li class="nav-item mx-1">
+              <a class="nav-link" href="/admin/transactions/history"
+                ><i class="bi bi-calendar-day"></i>TRANSACTIONS</a
+              >
+            </li>
+            <li class="nav-item mx-1">
+              <a class="nav-link" href="/admin/installments/outgoing"
+                ><i class="bi bi-calendar-day"></i>INSTALLMENTS</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div
+          class="collapse navbar-collapse nav2 justify-content-end"
+          id="navbarNavDropdown"
+        >
+          <ul
+            class="navbar-nav"
+            style="max-width: 9rem; text-align: center; margin: auto"
+          >
+            <li class="nav-item" style="min-width: 15rem">
+              <a class="nav-link text-white btn btn-dark" href="#"
+                ><i class="fa-solid fa-right-to-bracket"></i> <%=user.name%></a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+

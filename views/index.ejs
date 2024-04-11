@@ -1,0 +1,715 @@
+<%- include("index-header") %>
+<% 
+function formatNumberToShortString(number) {
+  const suffixes = ["", "Thousands", "Millions", "Billions", "Trillion"]; // K = Thousand, M = Million, B = Billion, T = Trillion
+
+  const numString = number.toString();
+  const numLength = numString.length;
+
+  if (numLength <= 3) {
+    return numString;
+  }
+
+  const suffixIndex = Math.floor((numLength - 1) / 3);
+  const roundedValue = (number / Math.pow(1000, suffixIndex)).toFixed(1);
+
+  return `${roundedValue} ${suffixes[suffixIndex]}`;
+} 
+
+
+%>
+<section style="min-height: 100vh">
+  <div class="container-fluid" id="nav">
+    <div class="container-fluid">
+      <section id="minimal-statistics">
+        <div class="row">
+          <div class="col-12 mt-3 mb-1">
+            <h4 class="text-uppercase">WELCOME <%=user.name%></h4>
+            <p>
+              “Success is not final; failure is not fatal: it is the courage to
+              continue that counts.” – Winston Churchill
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+              <div class="card-content" data-toggle="modal" data-target="#survey" type="button" >
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="align-self-center">
+                      <i class="icon-plus primary font-large-2 float-left"></i>
+                    </div>
+                    <div class="media-body text-right">
+                      <h3 class="primary">00.0%</h3>
+                      <span class="primary">DAILY SURVEY</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+              <a href="/admin/buyLand" style="text-decoration: none">
+                <div class="card-content">
+                  <div class="card-body">
+                    <div class="media d-flex">
+                      <div class="align-self-center">
+                        <i class="icon-map warning font-large-2 float-left"></i>
+                      </div>
+                      <div class="media-body text-right">
+                        <h3 class="warning"><%=inventory.length%></h3>
+                        <span class="warning">BUY LAND</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+              <a href="/signup" style="text-decoration: none">
+                <div class="card-content">
+                  <div class="card-body">
+                    <div class="media d-flex">
+                      <div class="align-self-center">
+                        <i
+                          class="icon-user success font-large-2 float-left"
+                        ></i>
+                      </div>
+                      <div class="media-body text-right">
+                        <h3 class="success"><%=usersCount%></h3>
+                        <span class="success">Signup User</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+              <a class="card-content" href="/admin/report" style="text-decoration: none;">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="align-self-center">
+                      <i
+                        class="icon-pointer danger font-large-2 float-left"
+                      ></i>
+                    </div>
+                    <div class="media-body text-right">
+                      <h3 class="danger">423</h3>
+                      <span class="danger">Total Visits</span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+              <a class="card-content" href="/admin/installments/outgoing" style="text-decoration: none;">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="media-body text-left">
+                      <h3 class="danger"><%=installmentsCount%></h3>
+                      <span class="danger">PENDING INSTALLMENTS</span>
+                    </div>
+                    <div class="align-self-center">
+                      <i
+                        class="icon-wallet danger font-large-2 float-right"
+                      ></i>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+              <a class="card-content" href="/admin/database" style="text-decoration: none;">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="media-body text-left">
+                      <h3 class="success">156</h3>
+                      <span class="success">OUR INVESTORS</span>
+                    </div>
+                    <div class="align-self-center">
+                      <i
+                        class="icon-users success font-large-2 float-right"
+                      ></i>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+              <a class="card-content" href="/admin/inventory" style="text-decoration: none;">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="media-body text-left">
+                      <h3 class="success"><%=inventory.length%></h3>
+                      <span class="success">INVENTORY</span>
+                    </div>
+                    <div class="align-self-center">
+                      <i
+                        class="bi bi-globe-asia-australia success font-large-2 float-right"
+                      ></i>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+              <a href="/admin/transactions/history" style="text-decoration: none">
+                <div class="card-content">
+                  <div class="card-body">
+                    <div class="media d-flex">
+                      <div class="align-self-center">
+                        <i
+                          class="fa-solid fa-clock-rotate-left warning font-large-2 float-left"
+                        ></i>
+                      </div>
+                      <div class="media-body text-right">
+                        <h3 class="warning"><%=transactionHistoryLength%></h3>
+                        <span class="warning">TRANSACTION HISTORY</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+              <div class="card-content " type="button" class="btn btn-primary" data-toggle="modal" data-target="#withdrwaFunds">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="media-body text-left">
+                      <h3 class="success">
+                        <%=inOut.withdrawl?formatNumberToShortString(inOut.withdrawl):0%> PKR
+                      </h3>
+                      <span class="success">Withdraw Funds</span>
+                    </div>
+                    <div class="align-self-center">
+                      <i
+                        class="fa-solid fa-file-export success font-large-2 float-right"
+                      ></i>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Button trigger modal -->
+
+
+
+          <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+              <div class="card-content"  type="button" class="btn btn-primary" data-toggle="modal" data-target="#depositFunds">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="media-body text-left">
+                      <h3 class="warning">
+                        <%= inOut.deposits?formatNumberToShortString(inOut.deposits):0%> PKR
+                      </h3>
+                      <span class="warning">Deposit Funds</span>
+                    </div>
+                    <div class="align-self-center">
+                      <i
+                        class="fa-solid fa-file-import warning font-large-2 float-right"
+                      ></i>
+                    </div>
+                  </div>
+                 
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+              <a class="card-content" href="/admin/report" style="text-decoration: none;">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="media-body text-left">
+                      <h3 class="danger">
+                        TRACK SUCCESS
+                      </h3>
+                      <span class="danger">Report</span>
+                    </div>
+                    <div class="align-self-center">
+                      <i
+                        class="fa-solid fa-vault danger font-large-2 float-right"
+                        
+                      ></i>
+                    </div>
+                  </div>
+                  
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="media-body text-left">
+                      <h3 class="warning"><%=formatNumberToShortString(treasure.totallAssets)%> PKR</h3>
+                      <span class="warning">Totall Assets</span>
+                    </div>
+                    <div class="align-self-center">
+                      <i
+                        class="fa-solid fa-database warning font-large-2 float-right "
+                      ></i>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="media-body text-left">
+                      <h3 class="text-success">
+                        <%= formatNumberToShortString( treasure.incomingFunds )%> PKR
+                      </h3>
+                      <span class="text-success">Incoming Funds</span>
+                    </div>
+                    <div class="align-self-center">
+                      <i
+                        class="fa-regular fa-circle-down text-success font-large-2 float-right"
+                      ></i>
+                    </div>
+                  </div>
+                  <div class="progress mt-1 mb-0" style="height: 7px">
+                    <div
+                      class="progress-bar bg-success"
+                      role="progressbar"
+                      style="width: 80%"
+                      aria-valuenow="80"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="media-body text-left">
+                      <h3 class="text-warning">
+                        <%=formatNumberToShortString(treasure.outGoingFunds)%> PKR
+                      </h3>
+                      <span class="text-warning">Out Going Funds</span>
+                    </div>
+                    <div class="align-self-center">
+                      <i
+                        class="fa-regular fa-circle-up text-warning font-large-2 float-right"
+                      ></i>
+                    </div>
+                  </div>
+                  <div class="progress mt-1 mb-0" style="height: 7px">
+                    <div
+                      class="progress-bar bg-warning"
+                      role="progressbar"
+                      style="width: 80%"
+                      aria-valuenow="80"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="media-body text-left">
+                      <h3 class="text-danger">
+                        <%= formatNumberToShortString(treasure.overAllBalance)%> PKR
+                      </h3>
+                      <span class="text-danger">Current Account Balance</span>
+                    </div>
+                    <div class="align-self-center">
+                      <i
+                        class="fa-solid fa-vault text-danger font-large-2 float-right"
+                      ></i>
+                    </div>
+                  </div>
+                  <div class="progress mt-1 mb-0" style="height: 7px">
+                    <div
+                      class="progress-bar bg-danger"
+                      role="progressbar"
+                      style="width: 80%"
+                      aria-valuenow="80"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="media-body text-left">
+                      <h3 class="success"><%=formatNumberToShortString(treasure.profit)%> PKR</h3>
+                      <span class="success">Profit</span>
+                    </div>
+                    <div class="align-self-center">
+                      <i
+                        class="fa-solid fa-money-bill-trend-up success font-large-2 float-right"
+                      ></i>
+                    </div>
+                  </div>
+                  <div class="progress mt-1 mb-0" style="height: 7px">
+                    <div
+                      class="progress-bar bg-success"
+                      role="progressbar"
+                      style="width: 80%"
+                      aria-valuenow="80"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <hr style="color: rgb(145, 146, 146)" />
+    </div>
+  </div>
+
+  <div class="continer-fluid p-5">
+    <div class="row p-1">
+      <div
+        class="col col-lg-4 col-md-12 col-sm-12 col-12 rounded py-3"
+        style="border-radius: 10px"
+      >
+        <h3 class="text-center mb-3" style="text-align: left !important;">Recent Activity</h3>
+        <hr
+          style="border-color: rgb(155, 157, 160); color: rgb(114, 117, 119)"
+        />
+        <% transactionHistory.forEach((transaction)=>{ %> <%
+        if(transaction.transactionType =="In-Coming" ){ %>
+        <div class="card shadow mt-3 p-3">
+          <div class="row">
+            <div
+              class="col-12 col-sm-2 col-md-2 p-2 d-flex align-items-center justify-content-center my-3"
+            >
+              <i
+                class="fas fa-arrow-circle-down fa-xl text-success"
+                style="font-size: 3rem !important"
+              ></i>
+            </div>
+
+            <div class="col-12 col-sm-8 col-md-8 p-2">
+              <h5>Incoming Transaction</h5>
+              <p>
+                You've been credited with <%=transaction.transactionAmount%> PKR
+              </p>
+              
+            </div>
+
+            <div
+              class="col-12 col-sm-2 col-md-2 p-2 d-flex align-items-center justify-content-center"
+            >
+              
+            </div>
+          </div>
+        </div>
+        <% }else if(transaction.transactionType =="Deposit" ){ %>
+        <div class="card shadow mt-3 p-3">
+          <div class="row">
+            <div
+              class="col-12 col-sm-2 col-md-2 p-2 d-flex align-items-center justify-content-center my-3"
+            >
+              <i
+                class="fas fa-arrow-circle-down fa-xl text-success"
+                style="font-size: 3rem !important"
+              ></i>
+            </div>
+
+            <div class="col-12 col-sm-8 col-md-8 p-2">
+              <h5>Funds Deposition</h5>
+              <p>
+                You've been credited with <%=transaction.transactionAmount%> PKR
+              </p>
+              
+            </div>
+
+            <div
+              class="col-12 col-sm-2 col-md-2 p-2 d-flex align-items-center justify-content-center"
+            >
+              
+            </div>
+          </div>
+        </div>
+        <% }else if(transaction.transactionType =="Withdrawl" ){ %>
+        <div class="card shadow mt-3 p-3">
+          <div class="row">
+            <div
+              class="col-12 col-sm-2 col-md-2 p-2 d-flex align-items-center justify-content-center my-3"
+            >
+              <i
+                class="fas fa-arrow-circle-up fa-xl text-danger"
+                style="font-size: 3rem !important"
+              ></i>
+            </div>
+
+            <div class="col-12 col-sm-8 col-md-8 p-2">
+              <h5>Funds Withdrawl</h5>
+              <p>
+                You've been debited with <%=transaction.transactionAmount%> PKR
+              </p>
+              
+            </div>
+
+            <div
+              class="col-12 col-sm-2 col-md-2 p-2 d-flex align-items-center justify-content-center"
+            >
+              
+            </div>
+          </div>
+        </div>
+        <% }else{ %>
+        <div class="card shadow mt-3 p-3">
+          <div class="row">
+            <div
+              class="col-12 col-sm-2 col-md-2 p-2 d-flex align-items-center  my-3 justify-content-center"
+            >
+              <i
+                class="fas fa-arrow-circle-up fa-xl text-danger"
+                style="font-size: 3rem !important"
+              ></i>
+            </div>
+
+            <div class="col-12 col-sm-8 col-md-8 p-2">
+              <h5>Outgoing Transaction</h5>
+              <p>
+                You've been debited with <%=transaction.transactionAmount%> PKR
+              </p>
+              
+            </div>
+
+            <div
+              class="col-12 col-sm-2 col-md-2 p-2 d-flex align-items-center justify-content-center"
+            >
+              
+            </div>
+          </div>
+        </div>
+        <% } %> <% }) %>
+      </div>
+
+      <div
+        class="col col-lg-8 col-md-12 col-sm-12 col-12 rounded py-3"
+        style="border-radius: 10px"
+      >
+        <h3 class="text-center mb-3" style="text-align: left !important;">
+          Recent Purchases & Sales
+        </h3>
+        <hr
+          style="border-color: rgb(155, 157, 160); color: rgb(114, 117, 119)"
+        />
+        <% buyLand.forEach((land)=>{ %>
+        <div class="card p-3 shadow">
+          <div class="row">
+            <div
+              class="col-12 col-sm-2 col-md-1 p-3 d-flex align-items-center justify-content-center"
+            >
+              <i
+                class="fa-solid fa-cart-arrow-down success fa-2xl"
+                style="font-size: 3rem !important"
+              ></i>
+            </div>
+
+            <div class="col-12 col-sm-7 col-md-8 pt-3">
+              <h6><%=land.landName%> | PURCHASED</h6>
+              <p>
+                Totall Worth:
+                <span style="font-weight: bold"> <%=land.totall%> </span> | Unit
+                Price:<span style="font-weight: bold"
+                  ><%=land.unitPrice%> PKR</span
+                >
+                | Area:
+                <span style="font-weight: bold"> <%=land.area%>PKR</span>
+              </p>
+            </div>
+
+            <div
+              class="col-12 col-sm-3 col-md-3 pt-3 d-flex align-items-center justify-content-end"
+            >
+              <h5 class="text-success" style="text-align: end !important;"><%=land.totall%> PKR</h5>
+            </div>
+          </div>
+        </div>
+        <% }) %> <% sellLand.forEach((land)=>{ %>
+
+        <div class="card p-3 shadow">
+          <div class="row">
+            <div
+              class="col-12 col-sm-2 col-md-1 p-3 d-flex align-items-center justify-content-center"
+            >
+              <i
+                class="fa-solid fa-handshake-angle danger fa-2xl"
+                style="font-size: 3rem !important"
+              ></i>
+            </div>
+
+            <div class="col-12 col-sm-7 col-md-8 pt-3">
+              <h6><%=land.landName%> | SOLD</h6>
+              <p>
+                Totall Worth:
+                <span style="font-weight: bold"> <%=land.totall%> </span> | Unit
+                Price:<span style="font-weight: bold"
+                  ><%=land.unitPrice%> PKR</span
+                >
+                | Area:
+                <span style="font-weight: bold"> <%=land.area%>PKR</span>
+              </p>
+            </div>
+
+            <div
+              class="col-12 col-sm-3 col-md-3 pt-3 d-flex align-items-center justify-content-end"
+            >
+              <h5 class="text-danger" style="text-align: end !important;"><%=land.totall%> PKR</h5>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="modal fade" id="survey" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content" style="border-radius: 16px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">How was <%=new Date().toLocaleDateString('en-US',{ weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }) %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/admin/survey/post" method="post">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Totall In-flow:</label>
+            <input type="number" class="form-control" name="totallInflow" id="recipient-name" placeholder="Totall income today">
+            <label for="recipient-name" class="col-form-label">Totall Out-flow:</label>
+            <input type="number" class="form-control" name="totallOutflow" id="recipient-name" placeholder="Totall expenses today,well keep it to site balance only for now !">
+            <label for="recipient-name" class="col-form-label">Visits Today:</label>
+            <input type="number" class="form-control" name="visits" id="recipient-name" placeholder="Visits we had today">
+            <label for="recipient-name" class="col-form-label">Purchases Today:</label>
+            <input type="number" class="form-control" name="purchases" id="recipient-name" placeholder="Sites Visited">
+             <label for="recipient-name" class="col-form-label">Sales Today:</label>
+            <input type="number" class="form-control" name="sales" id="recipient-name" placeholder="Sites Visited">
+             <label for="recipient-name" class="col-form-label">Profit Today:</label>
+            <input type="number" class="form-control" name="profit" id="recipient-name" placeholder="Sites Visited">
+             <label for="recipient-name" class="col-form-label">Visited Sites:</label>
+            <input type="text" class="form-control" name="visitedSite" id="recipient-name" placeholder="Sites Visited">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <textarea class="form-control" id="message-text" name="description"></textarea>
+          </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Discard</button>
+        <button type="submit" class="btn btn-outline-success">Post Survey</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="depositFunds" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content" style="border-radius: 16px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Deposit Funds</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/admin/depositFunds" method="post">
+          <p>Attempt to deposit funds on : <%=new Date().toLocaleDateString('en-US') +" Time: "+ new Date().toLocaleTimeString('en-US')%></p>
+          <label for="" class="form-label">Enter the amount you want to Deposit</label>
+          <input type="number" class="form-control" name="depositAmount" placeholder="Enter value you want to deposit in pkr">
+          <label for="" class="form-label">Deposit Purpose</label>
+          <input type="text" class="form-control" name="purpose">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-outline-success">Save changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="withdrwaFunds" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+  <div class="modal-dialog modal-dialog-centered" role="document" >
+    <div class="modal-content" style="border-radius: 16px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Withdraw Funds</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/admin/withdrawFunds" method="post">
+          <p>Attempt to withdraw funds  Date: <%=new Date().toLocaleDateString('en-US') +" Time: "+ new Date().toLocaleTimeString('en-US')%></p>
+          <label for="" class="form-label">Enter the amount you want to withdraw</label>
+          <input type="number" class="form-control" name="withdrawl" placeholder="Anywhere less then <%=treasure.overAllBalance%>">
+          <label for="" class="form-label">Withdrawl Purpose</label>
+          <input type="text" class="form-control" name="purpose">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-outline-success">Save changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<%-include("index-footer") %>

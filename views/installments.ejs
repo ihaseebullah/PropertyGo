@@ -1,0 +1,78 @@
+<%-include("genralHeader") %>
+<section style="min-height: 100vh;">
+<div class="p-5 pb-0">
+  <h2>Scheduled Incoming Installments</h2>
+  <p>A detailed summary of the transactions performed is listed below !</p>
+  <p>A totall number of transactions are made til this date and time :</p>
+</div>
+<hr />
+<div class="container p-5">
+    <a href="/admin/installments/incoming" class="btn btn-dark">Incoming Installments &nbsp; <i class="fa-solid fa-arrow-down"></i> </a>
+    <a href="/admin/installments/outgoing" class="btn btn-outline-dark">Outgoing Installments <i class="fa-solid fa-arrow-up"></i> </a>
+  
+  <% incomingInstallment.forEach((installment)=>{ %>
+  <div class="card shadow mt-3 p-3">
+    <button
+      class="row bg-white "
+      style="border: none; background-color: none;"
+    >
+      <div class="col-12 col-sm-8 col-md-10"  style="text-align: left !important">
+        <h5 style="text-align: left !important">
+          Pending Installments for <%=installment.landName ? installment.landName : "Title NOT FOUND (404)"%>
+        </h5>
+
+        <div class="innerDiv p-2 mt-3 text-left">
+          <h6>
+            Totall Installment :
+            <span style="font-weight: bold">
+              <%=installment.totallInstallmentAmount%> PKR</span
+            >
+          </h6>
+          <h6>
+            Deal Amount :
+            <span style="font-weight: bold">
+              <%=installment.totallInstallmentAmount%> PKR</span
+            >
+          </h6>
+          <h6>
+            Installment Amount:<span style="font-weight: bold">
+              <%=installment.expectedAmount%> PKR</span
+            >
+          </h6>
+          <h6>
+            Installment Date:
+            <span style="font-weight: bold">
+              <%=installment.expectedDate%></span
+            >
+          </h6>
+          <p style="text-align: center">
+            <a
+              href="/admin/inventory/<%=installment.buySchemaId%>/sellLand"
+              class="btn btn-success"
+              >View Deal <i class="fa-solid fa-arrow-right"></i></a
+            ><a
+              href="/admin/inventory/<%=installment.buySchemaId%>/sellLand"target="_blank"
+              class="mx-2 btn btn-success"
+              >Status : <%=installment.status%>
+              <i class="fa-solid fa-check"></i></a
+            >
+            <% if(installment.status=="Paid"){ %>
+            <a
+              href="<%=installment.reciept%>" target="_blank"
+              class="mx-2 btn btn-outline-success"
+              >View Reciept <i class="fa-solid fa-receipt"></i></a>
+            <%  } %>    
+          </p>
+        </div>
+      </div>
+      <div class="col-12 col-sm-2 col-md-2 p-2">
+        <h5 class="text-success"><i class="fa-solid fa-chevron-down"></i></h5>
+      </div>
+    </button>
+  </div>
+  <%})%>
+</div>
+</section>
+
+
+<%-include("index-footer") %>

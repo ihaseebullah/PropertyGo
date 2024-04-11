@@ -1,0 +1,223 @@
+<%- include("genralHeader") %>
+
+<section
+class="p-5"
+  style="
+    background-image: url('https://cdn.pixabay.com/photo/2016/11/29/03/53/house-1867187_1280.jpg');
+    zoom: 90%;
+  "
+>
+  <div
+    class="container-fluid p-5 rounded"
+    style="background-color: rgb(237, 238, 241)"
+  >
+    <h2 style="text-align: center">Buy land and diversify your reign</h2>
+
+    <form id="landForm" method="post" action="/admin/buyLand" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="landName" class="form-label">Land Name</label>
+        <input
+          required
+          required
+          type="text"
+          class="form-control"
+          id="landName"
+          name="landName"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="ownerCount" class="form-label">Number of Owners</label>
+        <input
+          required
+          type="number"
+          class="form-control"
+          id="ownerCount"
+          name="ownerCount"
+          min="1"
+        />
+      </div>
+      <!-- Generate owner name and phone number fields dynamically using JavaScript -->
+      <div id="ownerFields"></div>
+      <div class="row">
+        <div class="col">
+          <div class="mb-3">
+            <label for="location" class="form-label">Location</label>
+            <input
+              required
+              type="text"
+              class="form-control"
+              id="location"
+              name="location"
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-3">
+            <label for="location" class="form-label">Area</label>
+            <input
+              required
+              type="text"
+              class="form-control"
+              id="area"
+              name="area"
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-3">
+            <label for="location" class="form-label">Unit Price</label>
+            <input
+              required
+              type="text"
+              class="form-control"
+              id="unitPrice"
+              name="unitPrice"
+              placeholder="Unit Price"
+            />
+          </div>
+        </div>
+      </div>
+      <div id="installmentFieldsContainer" class="my-2">
+        <div class="mb-3">
+          <label for="installmentNumber">Number of Installments</label>
+          <input
+            required
+            type="number"
+            class="form-control"
+            id="installmentNumber"
+            min="1"
+            value="1"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button
+            type="button"
+            class="btn btn-success mb-3"
+            id="generateInstallmentsButton"
+          >
+            <i class="fa-solid fa-plus"></i> Generate Installments
+          </button>
+        </div>
+        <div class="col">
+          <button
+            type="button"
+            class="btn btn-danger mb-3"
+            id="removeInstallmentsButton"
+          >
+            <i class="fa-solid fa-delete-left"></i> Remove Installments
+          </button>
+        </div>
+      </div>
+      <div class="row">
+            <p class="danger"> <span style="font-weight: bold;">Note: </span> You cannot pay more then your current account balance : <span style="font-weight: bold;"><%= treasure.overAllBalance %></span> </p>
+
+        <div class="col">
+          <div class="mb-3">
+            <label for="location" class="form-label">Amount Paid</label>
+            <input
+              required
+              type="text"
+              class="form-control"
+              id="amountPaid"
+              name="amountPaid"
+              placeholder="Totall amount paid at the moment "
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-3">
+            <label for="totallInstallmentsAmount" class="form-label"
+              >Totall Installment Amount</label
+            >
+            <input
+              required
+              type="text"
+              class="form-control"
+              id="totallInstallmentsAmount"
+              name="totallInstallmentsAmount"
+              placeholder="Totall amount that will be paid via installments"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="location" class="form-label">Totall Amount</label>
+        <input
+          required
+          type="text"
+          class="form-control"
+          id="totall"
+          name="totall"
+          placeholder="Totall price of the land"
+        />
+      </div>
+
+      <br />
+
+      <label for="" class="form-label">Description</label>
+      <textarea
+        name="description"
+        id=""
+        cols="30"
+        class="form-control mb-5"
+        rows="10"
+        placeholder="Write a short description about the land you just purchased"
+      ></textarea>
+      <div class="row">
+        <div class="col">
+          <label for="" class="form-label">Gallery</label>
+          <p style="font-size: small; color: rgb(121, 120, 120)">
+            Upload photoshoot if you have on the spot
+          </p>
+          <input
+            required
+            type="file"
+            name="gallery"
+            multiple
+            class="form-control"
+          />
+        </div>
+      </div>
+      <br />
+      <!-- Other fields here -->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+  Proceed
+</button>
+      
+    
+  </div>
+</section>
+
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Warning !</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>    
+Warning: I confirm that I have reviewed the entered data and it is accurate. I understand that once I submit the information, I won't be able to edit it later to avoid complications.
+</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input required type="submit" value="This Data is accurate" class="btn btn-primary" />
+    </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%- include("index-footer") %>

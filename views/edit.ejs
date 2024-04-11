@@ -1,0 +1,333 @@
+<%-include ("genralHeader") %>
+<form action="/admin/inventory/<%=landDetails.uniqueId%>/update" method="post">
+<section class="p-5">
+<div class="container-fluid p-4 my-5 rounded border shadow bg-white">
+  
+<div class="title mb-5 pb-2">
+      <h3 class="mt-2"><%=landDetails.landName%></h3>
+      
+    </div>
+
+    <div class="container">
+      <div class="card card-raised card-carousel" style="margin-top: 0px">
+              <div
+                id="carouselExampleIndicators"
+                class="carousel slide"
+                data-ride="carousel"
+                data-interval="3000"
+              >
+                <ol class="carousel-indicators">
+                  <li
+                    data-target="#carouselExampleIndicators"
+                    data-slide-to="0"
+                    class="active"
+                  ></li>
+                  <li
+                    data-target="#carouselExampleIndicators"
+                    data-slide-to="1"
+                    class=""
+                  ></li>
+                  <li
+                    data-target="#carouselExampleIndicators"
+                    data-slide-to="2"
+                    class=""
+                  ></li>
+                </ol>
+                <div class="carousel-inner">
+                  <div
+                    class="carousel-item active"
+                    style="
+                      max-height: 40rem;
+                      min-height: 40rem;
+                      object-fit: contain;
+                    "
+                  >
+                    <img
+                      class="d-block w-100"
+                      src="https://rawgit.com/creativetimofficial/material-kit/master/assets/img/bg.jpg"
+                      alt="First slide"
+                      style="max-height: 40rem; min-height: 40rem"
+                    />
+                    <div class="carousel-caption d-none d-md-block"></div>
+                  </div>
+                            <% landDetails.gallery.forEach((img) => { %>
+
+                  <div
+                    class="carousel-item "
+                    style="
+                      max-height: 40rem;
+                      min-height: 40rem;
+                      object-fit: contain;
+                    "
+                  >
+                    <img
+                      class="d-block w-100"
+                      src="<%=img%>"
+                      style="max-height: 40rem;
+                      min-height: 40rem;
+                      object-fit: cover;"
+                      alt="Second slide"
+                    />
+                    <div class="carousel-caption d-none d-md-block"></div>
+                  </div>
+                  <% }) %>
+                </div>
+                <a
+                  class="carousel-control-prev"
+                  href="#carouselExampleIndicators"
+                  role="button"
+                  data-slide="prev"
+                  style="text-decoration: none"
+                >
+                  <!-- <i class="fa-solid fa-angles-left"></i>
+                  <span class="sr-only"></span> -->
+                </a>
+                <a
+                  class="carousel-control-next"
+                  href="#carouselExampleIndicators"
+                  role="button"
+                  style="text-decoration: none"
+                  data-slide="next"
+                >
+                  <!-- <i class="fa-solid fa-angles-right"></i>
+                  <span class="sr-only"></span> -->
+                </a>
+              </div>
+            </div>
+    </div>
+
+  <div class="row pr-3">
+    <h4 class="mt-4"><i class="bi bi-person-add"></i> Primary Details :</h4>
+
+    <hr />
+    <div class="col col-lg-5">
+<h4 class="mt-4">Partners Details :</h4>
+<div class="row mt-3">
+  <% if (Array.isArray(landDetails.ownerName[0])) { %>
+    <div class="col col-lg-6">
+      <% landDetails.ownerName.forEach((owners) => { %>
+        <% owners.forEach((owner, index) => { %>
+          <div class="form-group">
+            <label for="partnerName<%= index + 1 %>"><strong>Partner Name <%= index + 1 %> :</strong></label>
+            <input type="text" class="form-control" id="partnerName<%= index + 1 %>" name="partnerName" value="<%= owner %>" />
+          </div>
+        <% }) %>
+      <% }) %>
+    </div>
+    <div class="col col-lg-6">
+      <% landDetails.ownersPhoneNumber.forEach((phones) => { %>
+        <% phones.forEach((phone, index) => { %>
+          <div class="form-group">
+            <label for="partnerPhone<%= index + 1 %>"><strong>Partner Phone <%= index + 1 %> :</strong></label>
+            <input type="text" class="form-control" id="partnerPhone<%= index + 1 %>" name="partnerPhone" value="<%= phone %>" />
+          </div>
+        <% }) %>
+      <% }) %>
+    </div>
+  <% } else { %>
+    <div class="col col-lg-6">
+      <% let i = 1 %>
+      <% landDetails.ownerName.forEach((owner) => { %>
+        <div class="form-group">
+          <label for="partnerName<%= i %>"><strong>Partner Name <%= i %> :</strong></label>
+          <input type="text" class="form-control" id="partnerName<%= i %>" name="partnerName" value="<%= owner %>" />
+        </div>
+        <% i++ %>
+      <% }) %>
+    </div>
+    <div class="col col-lg-6">
+      <% let a = 1 %>
+      <% landDetails.ownersPhoneNumber.forEach((phone) => { %>
+        <div class="form-group">
+          <label for="partnerPhone<%= a %>"><strong>Partner Phone No <%= a %> :</strong></label>
+          <input type="text" class="form-control" id="partnerPhone<%= a %>" name="partnerPhone" value="<%= phone %>" />
+        </div>
+        <% a++ %>
+      <% }) %>
+    </div>
+  <% } %>
+</div>
+</div>
+
+<div class="col col-lg-4">
+  <h4 class="mt-4">Land Details :</h4>
+  <div class="row mt-3">
+    <div class="form-group">
+      <label for="landName"><strong><i class="bi bi-bookmark-fill"></i> Land Name :</strong></label>
+      <input type="text" class="form-control" id="landName" name="landName" value="<%= landDetails.landName %>" />
+    </div>
+    <div class="form-group">
+      <label for="area"><strong><i class="bi bi-rulers"></i> Area :</strong></label>
+      <input type="text" class="form-control" id="area" name="area" value="<%= landDetails.area %>" />
+    </div>
+    <div class="form-group">
+      <label for="location"><strong><i class="bi bi-geo-fill"></i> Location :</strong></label>
+      <input type="text" class="form-control" id="location" name="location" value="<%= landDetails.location %>" />
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="row mt-3 pr-3">
+  <h4 class="mt-4"><i class="bi bi-body-text"></i> Description :</h4>
+  <hr />
+  <div class="form-group">
+    <label for="description"><strong>Description :</strong></label>
+    <textarea class="form-control" rows="7" id="description" name="description"><%= landDetails.description %></textarea>
+  </div>
+</div>
+
+  <div class="row mt-3 pr-3">
+    <h4 class="mt-4"><i class="bi bi-receipt-cutoff"></i> Billing Details :</h4>
+    <div class="row">
+      <div class="col">
+        <div class="row mt-3">
+          <h6><strong>Unit Price :</strong></h6>
+          <p style="color: rgb(114, 112, 112)">
+            <%=landDetails.unitPrice%> PKR
+          </p>
+          <h6><strong>Totall Price:</strong></h6>
+          <p style="color: rgb(114, 112, 112)"><%=landDetails.totall%> PKR</p>
+          <h6><strong>Payment Method :</strong></h6>
+          <p style="color: rgb(114, 112, 112)">
+            <%=landDetails.paymentMethod%>
+          </p>
+        </div>
+      </div>
+      <% let installments=landDetails.installmentsAmount.length %>
+      <div class="col">
+        <div class="row mt-3">
+          <h6><strong>Installment :</strong></h6>
+          <% if(installments==0){ %>
+          <p style="color: rgb(114, 112, 112)">No</p>
+          <% }else{ %>
+          <p style="color: rgb(114, 112, 112)">Yes</p>
+          <%} %>
+          <h6><strong>Number of installments:</strong></h6>
+          <p style="color: rgb(114, 112, 112)"><%=installments%></p>
+          <h6><strong>Totall amount to be payed via installments :</strong></h6>
+          <p style="color: rgb(114, 112, 112)">
+            <%=landDetails.totallInstallmentAmount%> PKR
+          </p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="row mt-3">
+          <h6><strong>Amount Paid :</strong></h6>
+          <p style="color: rgb(114, 112, 112)">
+            <%=landDetails.amountPaid%> PKR
+          </p>
+          <h6><strong>Number of installments:</strong></h6>
+          <p style="color: rgb(114, 112, 112)"><%=installments%></p>
+          <h6><strong>Totall amount to be payed via installments :</strong></h6>
+          <p style="color: rgb(114, 112, 112)">
+            <%=landDetails.totallInstallmentAmount%> PKR
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+<hr>
+<div class="row pr-3">
+  <h4>Scheduled Installments <span class="badge badge-pill badge-danger">Out-Going</span></h4>
+  <% let i=0 %>
+    <% outGoingInstallments.forEach((installment)=>{ %>
+      <div class="row">
+        <div class="col">
+          <h6 class="mt-3"><strong>Instalment no 0<%=i + 1%> </strong></h6>
+          <p style="color: rgb(127, 128, 129);">Tx Id:<%=installment._id%> <br>
+            A sum of <%=installment.expectedAmount%> Pakistani Rupees has been earmarked for the installment
+            scheduled on the <%=installment.expectedDate%> %>. <br> <span style="font-weight: bold;">Amount Paid: <%= installment.amountPaid?installment.amountPaid:0 %></span>
+          </p>
+        </div>
+        <div class="col">
+          <h6 class="mt-3"><strong>Instalment no  0<%=i + 1%> Take Action :</strong></h6>
+         <% if(installment.status=="Paid"){ %>
+          <div class="modal fade" id="<%=i + 1%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Submission for installment no. <%=i + 1%></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/admin/installments/og/<%=installment._id%>/submit" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Recipient:</label>
+            <input type="text" name="recipient" class="form-control" id="recipient-name" value="<%=landDetails.ownerName%>">
+            <label for="message-text" class="col-form-label">Amount Paid</label>
+            <input type="number" name="amount" placeholder="Scheduled installment amount is <%=installment.expectedAmount%>" value="<%=installment.amountPaid%>" class="form-control" >
+            <label for="message-text" class="col-form-label">Date</label>
+            <input type="text" name="date" placeholder="Due date for this installment is schecduled on <%=installment.expectedDate%>" value="<%=installment.date%>" class="form-control" >
+           <label for="message-text" class="col-form-label">Reciept</label>
+            <input type="file" accept="images/*" name="reciept"  class="form-control" >
+           
+            
+          </div>
+           <p style="font-size: smaller;">Fun fact : Hard proof of soft transactions always stay fruitfull.</p>
+           <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-success" disabled value="Submit">
+      </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+            <a  class="btn btn-success">Status : <%=installment.status%> <i class="fa-solid fa-check"></i></a>
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#<%=i + 1%>"><i class="fa-solid fa-pen-to-square" ></i> Edit</button>
+          <a href="<%=installment.reciept%>" class="btn btn-outline-warning" target="_blank"><i class="fa-solid fa-receipt"></i> View Reciept</a>
+        <%  }else{ %>
+          <a  class="btn btn-danger">Status : Not paid <i class="fa-solid fa-xmark"></i></a>
+          <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#<%=i + 1%>"><i class="fa-solid fa-plus"></i> Add Submission</button>
+        <%  }  %>
+          <div class="modal fade" id="<%=i + 1%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Submission for installment no. <%=i + 1%></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/admin/installments/og/<%=installment._id%>/submit" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Recipient:</label>
+            <input type="text" name="recipient" class="form-control" id="recipient-name" placeholder="<%=landDetails.ownerName%>">
+            <label for="message-text" class="col-form-label">Amount Paid</label>
+            <input type="number" name="amount" placeholder="Scheduled installment amount is <%=installment.expectedAmount%>" class="form-control" >
+            <label for="message-text" class="col-form-label">Date</label>
+            <input type="text" name="date" placeholder="Due date for this installment is schecduled on <%=installment.expectedDate%>" class="form-control" >
+           <label for="message-text" class="col-form-label">Reciept</label>
+            <input type="file" accept="images/*" name="reciept"  class="form-control" >
+           
+            
+          </div>
+           <p style="font-size: smaller;">Fun fact : Hard proof of soft transactions always stay fruitfull.</p>
+           <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-success" value="Submit">
+      </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+        </div>
+      </div>
+<% i++; %>
+      <% }) %>
+</div>
+  </div>
+  <p>"You are unable to modify fields such as billing and installments once they have been entered, as they are integral to our weekly, monthly, and yearly report calculation algorithms, ensuring the accuracy of your reports. We kindly request that you only proceed to fill out these forms when you have precise and accurate numbers, as making changes later could potentially disrupt your report accuracy."</p>    <hr />
+<input type="reset" class="btn btn-warning" value="Reset">
+<input type="submit" class="btn btn-success" value="Save Changes">
+</div>
+</section>
+</form>
+<%-include ("index-footer") %>

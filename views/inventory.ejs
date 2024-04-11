@@ -1,0 +1,174 @@
+<%- include("index-header") %>
+<section style="min-height: 100vh;">
+
+<section id="header" class="jumbotron text-center">
+  <h1 class="display-3">INEVENTORY</h1>
+  <p class="lead">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+  <a href="/admin/buyLand" class="btn btn-success">BUY LAND</a>
+  <a href="/admin/sellLand" class="btn btn-warning">SELL LAND</a>
+</section>
+
+<section id="gallery">
+  <div class="container-fluid">
+    <div class="row">
+      <% inventory.forEach((item)=>{ %>
+      <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+        <div class="card">
+          <div class="card-img-top" style="padding: -2rem">
+            <!-- Carousel Card -->
+            <div class="card card-raised card-carousel" style="margin-top: 0px">
+              <div
+                id="carouselExampleIndicators"
+                class="carousel slide"
+                data-ride="carousel"
+                data-interval="3000"
+              >
+                <ol class="carousel-indicators">
+                  <li
+                    data-target="#carouselExampleIndicators"
+                    data-slide-to="0"
+                    class="active"
+                  ></li>
+                  <li
+                    data-target="#carouselExampleIndicators"
+                    data-slide-to="1"
+                    class=""
+                  ></li>
+                  <li
+                    data-target="#carouselExampleIndicators"
+                    data-slide-to="2"
+                    class=""
+                  ></li>
+                </ol>
+                <div class="carousel-inner">
+                  <div
+                    class="carousel-item active"
+                    style="
+                      max-height: 20rem;
+                      min-height: 20rem;
+                      object-fit: cover;
+                    "
+                  >
+                    <img
+                      class="d-block w-100"
+                      src="https://rawgit.com/creativetimofficial/material-kit/master/assets/img/bg.jpg"
+                      alt="First slide"
+                      style="max-height: 20rem; min-height: 20rem"
+                    />
+                    <div class="carousel-caption d-none d-md-block"></div>
+                  </div>
+                  <% item.images.forEach((img)=>{ %>
+                  <div
+                    class="carousel-item "
+                    style="
+                      max-height: 20rem;
+                      min-height: 20rem;
+                      object-fit: cover;
+                    "
+                  >
+                    <img
+                      class="d-block w-100"
+                      src="<%=img%>"
+                      style="max-height: 20rem;
+                      min-height: 20rem;
+                      object-fit: cover;"
+                      alt="Second slide"
+                    />
+                    <div class="carousel-caption d-none d-md-block"></div>
+                  </div>
+                  <% }) %>
+                </div>
+                <a
+                  class="carousel-control-prev"
+                  href="#carouselExampleIndicators"
+                  role="button"
+                  data-slide="prev"
+                  style="text-decoration: none"
+                >
+                  <!-- <i class="fa-solid fa-angles-left"></i>
+                  <span class="sr-only"></span> -->
+                </a>
+                <a
+                  class="carousel-control-next"
+                  href="#carouselExampleIndicators"
+                  role="button"
+                  style="text-decoration: none"
+                  data-slide="next"
+                >
+                  <!-- <i class="fa-solid fa-angles-right"></i>
+                  <span class="sr-only"></span> -->
+                </a>
+              </div>
+            </div>
+            <!-- End Carousel Card -->
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-9" style="max-height: 5rem; min-height: 4rem">
+                <h6 class="card-title"><%=item.landName%></h6>
+              </div>
+              <% if(item.status=="SOLD"){ %>
+              <div class="col-2">
+                <span class="badge badge-danger"><%=item.status%></span>
+              </div>
+              <% }else{ %>
+              <div class="col-3">
+                <span class="badge badge-success"><%=item.status%></span>
+              </div>
+              <% } %>
+            </div>
+            <p style="color: rgb(80, 81, 82)"><%=item.location%></p>
+            <hr />
+            <p style="display: inline"><%=item.area%> at a unit price of</p>
+            <span class="danger" style="display: inline"
+              ><%=item.unitPrice%> PKR</span
+            >
+            <div style="overflow: hidden; max-height: 13rem; min-height: 13rem">
+              <h6 class="mt-2"><b> Description :</b></h6>
+              <p class="card-text" style="color: rgb(112, 110, 107)">
+                <%=item.description.substring(0,300)%>
+                <strong>......continues</strong>
+              </p>
+            </div>
+            <h5 style="display: inline">
+              Totall Price
+              <span class="success" style="display: inline">
+                <b><%=item.totall%> PKR</b>
+              </span>
+            </h5>
+            <br /><br />
+            <a
+              href="/admin/inventory/<%=item.buySchemaId%>/viewLand"
+              class="btn btn-success btn-sm"
+              >Read More &nbsp; <i class="fa-solid fa-angles-right"></i
+            ></a>
+
+            <a
+              href="/admin/inventory/<%=item.buySchemaId%>/sellLand"
+              class="btn btn-outline-success btn-sm"
+              ><i class="fa-brands fa-bitcoin"></i>&nbsp;Sell Land</a
+            >
+            <a href="/admin/installments/outgoing" class="btn btn-outline-success btn-sm"
+              ><i class="fa-regular fa-bell"></i
+            ></a>
+            <a href="/admin/inventory/<%=item.buySchemaId%>/edit" class="btn btn-outline-success btn-sm"
+              ><i class="fa-regular fa-pen-to-square"></i
+            ></a>
+                <form style="display: inline;" action="/admin/inventory/<%=item.buySchemaId%>/like" method="post">
+            <button type="submit" href="" class="btn btn-outline-danger btn-sm"
+              ><i class="far fa-heart"></i> &nbsp; &nbsp; <%=item.likes%></button>
+              </form>
+              <a
+              href="/admin/inventory/<%=item.buySchemaId%>/delete"
+              class="btn btn-outline-danger mx-1 btn-sm"
+              ><i class="fa-solid fa-trash-can"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+</section>
+<%- include("index-footer") %>
