@@ -126,4 +126,4 @@ Property Go relies on the following npm packages:
 - Further enhancing customer satisfaction.
 
 ## Summary
-REMS has significantly transformed our client's real estate management practices, driving efficiency, profitability, and customer satisfaction. With its comprehensive features and seamless integration capabilities, REMS stands as a testament to our commitment to delivering innovative solutions that empower businesses to thrive in today's dynamic real estate landscape.
+PROPERTY GO has significantly transformed our client's real estate management practices, driving efficiency, profitability, and customer satisfaction. With its comprehensive features and seamless integration capabilities, PROPERTY GO stands as a testament to our commitment to delivering innovative solutions that empower businesses to thrive in today's dynamic real estate landscape.
