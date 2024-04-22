@@ -1,7 +1,68 @@
-# Real Estate Management System (REMS)
+# Property Go
 
-Welcome to the Real Estate Management System (REMS) repository! REMS is a comprehensive solution designed to streamline and enhance real estate operations, providing users with unparalleled control and insight into every aspect of their real estate ventures.
+Property Go is a web application designed to simplify property management tasks. It provides features for property listing, image uploading, user authentication, and more.
 
+# Installation
+To run Property Go on your local machine, follow these steps:
+
+## 1 Clone the repository:
+``` bash
+Copy code
+git clone https://github.com/your-username/property-go.git
+```
+Replace your-username with your GitHub username if you're forking the repository.
+Navigate to the project directory:
+bash
+Copy code
+``` cd property-go ```
+## 2 Install dependencies:
+``` bash 
+Copy code
+npm install
+ ```
+## 3 Set up environment variables:
+Create a `.env` file in the root directory and add the following variables:
+``` makefile
+Copy code
+PORT=3000
+MONGODB_URI=<your_mongodb_uri>
+CLOUDINARY_CLOUD_NAME=<your_cloudinary_cloud_name>
+CLOUDINARY_API_KEY=<your_cloudinary_api_key>
+CLOUDINARY_API_SECRET=<your_cloudinary_api_secret>
+SESSION_SECRET=<your_session_secret>
+```
+
+## 4 Run the application:
+``` bash
+Copy code
+npm start
+```
+
+This will start the server using Nodemon, which will automatically restart the server when changes are made.
+## 5 Access the application:
+Open your web browser and go to http://localhost:3000 to access Property Go.
+Usage
+Property Go simplifies property management tasks by providing the following features:
+
+# Property Listing:
+Users can list their properties with details such as description, price, location, and images.
+Image Upload: Property images can be uploaded using Cloudinary for efficient storage and retrieval.
+User Authentication: Users can sign up, log in, and log out securely to manage their properties.
+Session Management: Express sessions are used to maintain user sessions securely.
+# Dependencies
+Property Go relies on the following npm packages:
+
+`axios`: Promise-based HTTP client for making requests to external APIs.
+`bcrypt`: Library for hashing passwords securely.
+`cloudinary`: SDK for integrating with Cloudinary image storage and manipulation service.
+`dotenv`: Loads environment variables from a .env file into process.env.
+`ejs`: Embedded JavaScript templates for generating HTML markup.
+`express`: Fast, unopinionated, minimalist web framework for Node.js.
+`express-session`: Middleware for managing user sessions in Express.
+`mongoose`: MongoDB object modeling tool designed to work in an asynchronous environment.
+`multer`: Middleware for handling multipart/form-data, primarily used for file uploads.
+`nodemon`: Utility that automatically restarts the Node.js application when file changes are detected.
+`uniqid`: Generates unique IDs to avoid conflicts.
 ## Features
 
 ### 1. Transaction Management
