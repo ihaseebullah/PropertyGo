@@ -5,7 +5,7 @@ Property Go is a web application designed to simplify property management tasks.
 # Installation ⏬
 To run Property Go on your local machine, follow these steps:
 
-## 1 Clone the repository:
+## 1 Clone the repository :
 ``` bash
 Copy code
 git clone https://github.com/your-username/property-go.git
