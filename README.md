@@ -2,7 +2,7 @@
 
 Property Go is a web application designed to simplify property management tasks. It provides features for property listing, image uploading, user authentication, and more.
 
-# Installation
+# Installation ⏬
 To run Property Go on your local machine, follow these steps:
 
 ## 1 Clone the repository:
